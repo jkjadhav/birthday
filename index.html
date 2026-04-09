@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday ❤️</title>
+<style>
+body { margin:0; font-family: 'Segoe UI', sans-serif; overflow-x:hidden; }
+.page { display:none; height:100vh; }
+.active { display:flex !important; }
+.active { display:flex; }
+.center { justify-content:center; align-items:center; flex-direction:column; }
+
+/* Page 1 */
+#page1 { }
+.left, .right { width:50%; display:flex; justify-content:center; align-items:center; flex-direction:column; }
+.left img { width:70%; border-radius:20px; }
+input { padding:10px; border-radius:10px; border:1px solid #ccc; }
+button { padding:10px 20px; border:none; border-radius:10px; background:#ff69b4; color:white; cursor:pointer; }
+
+/* Page 2 */
+#page2 { flex-direction:column; text-align:center; background:#fff0f5; }
+.cake { font-size:50px; animation: bounce 1s infinite alternate; }
+@keyframes bounce { from{transform:translateY(0);} to{transform:translateY(-10px);} }
+
+/* Page 3 */
+.gifts { display:flex; gap:40px; }
+.gift { width:100px; height:100px; background:red; border-radius:10px; cursor:pointer; position:relative; }
+.gift:before { content:'🎁'; position:absolute; font-size:50px; top:20px; left:20px; }
+
+/* Hidden sections */
+.hidden { display:none; }
+
+/* Cake Page */
+#cakePage { flex-direction:column; }
+.candle { font-size:40px; }
+.blow { opacity:0; transition:1s; }
+
+/* Letter */
+#letterPage { padding:20px; text-align:center; }
+
+/* Gallery */
+#galleryPage img {
+  width: 180px;
+  height: 240px;
+  object-fit: cover;
+  margin: 10px;
+  border-radius: 15px;
+}
+
+@media(max-width:768px){
+  #page1 { flex-direction:column; }
+  .left, .right { width:100%; }
+  .left img { width:90%; }
+  .gifts { flex-direction:column; align-items:center; }
+  .gift { width:120px; height:120px; }
+  button { width:80%; font-size:16px; }
+  input { width:80%; }
+}
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<div id="page1" class="page active">
+<div class="left">
+<img src="15.jpeg" alt="us">
+</div>
+<div class="right">
+<h2>Enter Password ❤️</h2>
+<input type="password" id="password">
+<p>Hint: Our special day 💖</p>
+<button type="button" onclick="checkPassword()">Unlock</button>
+</div>
+</div>
+
+<!-- BIRTHDAY PAGE -->
+<div id="birthdayPage" class="page center">
+<h1>🎉 Happy Birthday 🎂</h1>
+<div class="cake">🎂 🎉 🎈</div>
+<button onclick="showPage('page3')">Next ➡️</button>
+</div>
+
+<!-- PAGE 3 -->
+<div id="page3" class="page center">
+<h2>Click any gift 🎁</h2>
+<div class="gifts">
+<div class="gift" onclick="openGift(1)"></div>
+<div class="gift" onclick="openGift(2)"></div>
+<div class="gift" onclick="openGift(3)"></div>
+</div>
+</div>
+
+<!-- Cake -->
+<div id="cakePage" class="page center">
+<h2>Make a Wish 🎂</h2>
+<div id="candle" class="candle">🕯️</div>
+<button onclick="blowCandle()">Blow 💨</button>
+<br><br>
+<button onclick="showPage('page3')">⬅️ Back</button>
+</div>
+
+<!-- Letter -->
+<div id="letterPage" class="page center">
+<h2>💌 For You</h2>
+<p>You are my favorite person 😄❤️<br>
+You make my life beautiful 🌸<br>
+And yes... you still owe me treats 😂🍫</p>
+<div>❤️ 🧸 ⭐ 💖</div>
+<br>
+<button onclick="showPage('page3')">⬅️ Back</button>
+</div>
+
+<!-- Gallery -->
+<div id="galleryPage" class="page center">
+<h2>Our Memories 📸</h2>
+<div>
+<img src="4.jpg">
+<img src="2.jpg">
+<img src="3.jpg">
+</div>
+<br>
+<button onclick="showPage('page3')">⬅️ Back</button>
+</div>
+
+<script>
+function checkPassword(){
+  let pass = document.getElementById('password').value;
+
+  if(pass === "1234"){
+    showPage('birthdayPage');
+  } else {
+    alert("Wrong password 😢");
+  }
+}
+
+function showPage(pageId){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+}
+
+function openGift(num){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+if(num==1) document.getElementById('cakePage').classList.add('active');
+if(num==2) document.getElementById('letterPage').classList.add('active');
+if(num==3) document.getElementById('galleryPage').classList.add('active');
+}
+
+function blowCandle(){
+document.getElementById('candle').classList.add('blow');
+}
+</script>
+
+</body>
+</html>
